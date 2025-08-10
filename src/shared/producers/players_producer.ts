@@ -25,6 +25,12 @@ export function selectPlayerById(userId: number) {
 	};
 }
 
+export function selectPlayerCashById(userId: number) {
+	return (state: SharedState) => {
+		return state.players.players.get(userId)?.data?.cash;
+	};
+}
+
 export function selectPlayersById(state: SharedState) {
 	return state.players.players;
 }
