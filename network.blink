@@ -1,0 +1,16 @@
+option ClientOutput = "src/client/network.luau"
+option ServerOutput = "src/server/network.luau"
+option Typescript = true
+
+event start {
+    from: Client,
+    type: Reliable,
+    call: SingleAsync,
+}
+
+event dispatch {
+    from: Server,
+    type: Reliable,
+    call: SingleAsync,
+    data: unknown
+}
