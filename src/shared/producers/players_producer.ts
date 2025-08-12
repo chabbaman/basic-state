@@ -4,11 +4,13 @@ import { SharedState } from "shared/shared_producer";
 
 export interface PlayerData {
 	cash: number;
+	lastJoined?: number;
 }
 
 export interface PlayerState {
 	data?: PlayerData;
 	userId: number;
+	plot?: Model;
 }
 
 export interface PlayerSlice {
@@ -39,6 +41,12 @@ export function getPlayerId(player: PlayerState) {
 	return player.userId;
 }
 
+export function selectPlotById(playerId: number) {
+	return (state: SharedState) => {
+		return state.players.players.get(playerId)?.plot;
+	};
+}
+
 export const players_slice = createProducer(initialState, {
 	setPlayer: (state, userId, playerState: PlayerState) => {
 		return produce(state, (draft) => {
@@ -56,6 +64,14 @@ export const players_slice = createProducer(initialState, {
 	deletePlayer: (state, userId) => {
 		return produce(state, (draft) => {
 			draft.players.delete(userId);
+		});
+	},
+	setPlayerPlot: (state, userId, plot: Model) => {
+		return produce(state, (draft) => {
+			const playerState = draft.players.get(userId);
+			if (playerState) {
+				playerState.plot = plot;
+			}
 		});
 	},
 });

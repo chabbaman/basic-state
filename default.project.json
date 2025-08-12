@@ -28,6 +28,7 @@
 			"$className": "StarterPlayer",
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts",
+				"$ignoreUnknownInstances": true,
 				"TS": {
 					"$path": "out/client"
 				}
